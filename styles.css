@@ -28,6 +28,22 @@ a {
   text-transform: uppercase;
 }
 
+.menu-btn {
+  /*! NOTE--3.1: because we are using rem's for  defining the height of the header, we should use rem's here as well so the button can scale with it. 👇*/
+  height: 3rem;
+  width: 3rem;
+  /*! NOTE--3.2: because the spans inside are inline elements,and inline elements,and inline elements occupy as much space as needed.The width of an inline element is the width of the content. The height and width of an inline element cannot be set in CSS.And in our case the inline elements doesn't have any content, and thats why they are not displayed at all.So we are making their parent a flex container, which makes them block elements. 👇*/
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.menu-btn span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+}
+
 .main-header ul {
   list-style: none;
   display: flex;
@@ -46,6 +62,47 @@ a {
 
 .main-header nav a:hover {
   color: rgb(228, 163, 44);
+}
+
+.side-drawer {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(29, 26, 27);
+  /*! NOTE--3.3 Take the element out of the document flow, position it relative to the view port, so the visible area in the page of the browser to the top and left with no distance.👇*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+#side-drawer:target {
+  display: block;
+}
+.side-drawer header {
+  /*?💡 typically trough this course we used padding to increase the height of the an elements. But we want to have fixed hight for this element 👇*/
+  height: 5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /*?💡 make sure that the elements are not  sitting directly next to the left and right border of the header 👇*/
+  padding: 0 5%;
+}
+.side-drawer ul {
+  list-style: none;
+  margin: 0;
+  padding: 4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-drawer li {
+  margin: 1rem 0;
+}
+
+.side-drawer a {
+  color: rgb(253, 239, 213);
+  font-size: 2rem;
 }
 
 main h1 {
@@ -92,14 +149,13 @@ main h1 {
   text-align: center;
 }
 
-h2 {
+.food-item h2 {
   /*! NOTE--1.1: font-size: 100%; -> This means that the font size should be equal to 100% of the parent's font size.If there is no font-size set to the parent of the <h2> element then it takes the default font size from the browser.*/
 
   /*! NOTE--1.2: font-size: 2em; -> Works the same as the % value in font-size context. 1em = 100%, 2em = 200% etc.*/
 
   /*! NOTE--1.3: font-size: 2rem; -> the font size is always relative to the root element `<html>` font size. With no default value set for the root element, the size always is relative to the browsers settings of the user. */
-
-  font-size: 2rem;
+  margin: 0 0 1rem 0;
 }
 
 .btn {
@@ -111,4 +167,23 @@ h2 {
 
 .btn:hover {
   background-color: rgb(221, 134, 34);
+}
+
+/** NOTE--3.0 @media(max-width: 768px) -> @media(max-width: 48rem) we assume that the user use the default browser settings for fon-size, which are 16px. ~768px / 16px = 48rem~ */
+@media (max-width: 48rem) {
+  .main-header nav {
+    display: none;
+  }
+
+  .menu-btn {
+    display: flex;
+  }
+
+  main h1 {
+    font-size: 1.5rem;
+  }
+
+  .latest-products ul {
+    grid-template-columns: 100%;
+  }
 }
